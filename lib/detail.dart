@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/game.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Game game;
 
   const DetailPage({
@@ -10,7 +10,21 @@ class DetailPage extends StatelessWidget {
   });
 
   @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  bool isLiked = false;
+
+  void toggleLike() {
+    setState(() {
+      isLiked = !isLiked;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final game = widget.game;
     return Scaffold(
       body: Stack(
         children: [
@@ -24,14 +38,33 @@ class DetailPage extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: IconButton(
+                      icon: Icon(
+                        isLiked
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: isLiked ? Colors.red : Colors.black,
+                      ),
+                      onPressed: toggleLike,
+                    ),
+                  ),
+
+                ],
               ),
             ),
           ),
