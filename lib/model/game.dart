@@ -4,6 +4,7 @@ class Game {
   String developer;
   String image;
   String desc;
+  bool isLiked;
 
   Game({
     required this.id,
@@ -11,6 +12,7 @@ class Game {
     required this.developer,
     required this.image,
     required this.desc,
+    this.isLiked = false,
   });
 }
 

@@ -14,11 +14,9 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool isLiked = false;
-
   void toggleLike() {
     setState(() {
-      isLiked = !isLiked;
+      widget.game.isLiked = !widget.game.isLiked;
     });
   }
 
@@ -55,10 +53,8 @@ class _DetailPageState extends State<DetailPage> {
                     backgroundColor: Colors.white,
                     child: IconButton(
                       icon: Icon(
-                        isLiked
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: isLiked ? Colors.red : Colors.black,
+                        widget.game.isLiked ? Icons.favorite : Icons.favorite_border,
+                        color: widget.game.isLiked ? Colors.red : Colors.black,
                       ),
                       onPressed: toggleLike,
                     ),
